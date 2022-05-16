@@ -3,11 +3,14 @@ const app=express();
 const dotenv=require('dotenv');
 const path=require('path');
 const connectDB=require('./database/connection')
-const pages=require('./routes/pages')
-const adminPages=require('./routes/admin-pages')
+
 const session=require('express-session');
 const expressValidator=require('express-validator');
 const bodyparser=require('body-parser');
+const morgan =require('morgan');
+const pages=require('./routes/pages')
+const adminPages=require('./routes/admin-pages')
+const adminCategory=require('./routes/adminCategory')
 
 
 
@@ -21,6 +24,9 @@ dotenv.config()
 app.use(express.json());
 //parse request to body-parser
 app.use(bodyparser.urlencoded({ extended: true} ));
+
+//LOGs
+app.use(morgan('tiny'));
 
 // set view engine
 app.set("view engine", "ejs")
@@ -70,6 +76,7 @@ app.use (function (req, res, next){
 //Set Up Routes
 app.use('/',pages)
 app.use('/admin/pages',adminPages)
+app.use('/admin/categories',adminCategory)
 
 //Server Run
 app.listen(process.env.PORT,()=>{

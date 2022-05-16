@@ -1,5 +1,4 @@
 const router=require('express').Router();
-const { exists } = require('../models/pages');
 const Page=require('../models/pages')
 
 // router.get('/',(req,res)=>{
@@ -41,9 +40,18 @@ router.post ('/add-page', function (req, res){
         res.status(500).send('Error')
     }
 
-  
     
 });
+
+router.get("/delete-page/:id", async (req, res) => {
+    try {
+      await Page.findByIdAndDelete(req.params.id);
+      req.flash ('success', 'Page deleted!'); 
+      res.status(200).redirect('/admin/pages')
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
 
 
 

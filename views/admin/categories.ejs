@@ -1,31 +1,28 @@
+<title>ADmin Categories</title>
+
 <%- include('../layout/adminheader') %>
 <div class="m"></div>
 <h2 class="page-title">Add page</h2>
-<a href="/admin/pages/add-page" class="btn btn-primary">Add pages</a>
+<a href="/admin/categories/add-category" class="btn btn-primary">Add Category</a>
 <br /><br />
 
 <table class="table table-striped">
   <thead>
-    <tr class="home">
-      <th>Title</th>
+    <tr >
+      <th>Categories</th>
       <th>Edit</th>
       <th>Delete</th>
     </tr>
   </thead>
   <tbody>
-    <% page.forEach (function (page){ %>
+    <% category.forEach (function (cat){ %>
 
-    <tr id="id_ <%= page._id %>" class="<= page.slug %>">
+    <tr>
 
-      <td><%= page.title %></td>
-      <td><a href="/admin/pages/edit-page/<%= page.slug %>">Edit</a></td>
-
-      <% if (page.slug=="Home"){ %>
-      <td></td>
-      <%}else {%>
-        <td><a class="confirmDeletion"  href="/admin/pages/delete-page/<%= page._id %>">Delete</a></td>
-        <%};%>
-        <%= page.content %>
+      <td><%= cat.title %></td>
+      <td><a href="/admin/categories/edit-category/<%= cat._id %>">Edit</a></td>
+        <td><a class="confirmDeletion"  href="/admin/categories/delete-category/<%= cat._id %>">Delete</a></td>
+        
     </tr>
 
     <% }); %>
@@ -33,7 +30,7 @@
   
 </table>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+<!-- <script>
     $('tbody').sortable({
 
    items: "tr:not('.Home')",
@@ -44,5 +41,5 @@
        S.post (url, ids);
     }   
 });
-</script>
+</script> -->
 <%- include('../layout/adminfooter') %>
